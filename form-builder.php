@@ -12,7 +12,7 @@
 add_action('init', function () {
 	if ( is_admin() ) {
 		// we are in admin mode
-		require_once __DIR__ . '/admin/form-builder-admin.php';
+		require_once __DIR__ . '/admin/index.php';
 	} 
 });
 
