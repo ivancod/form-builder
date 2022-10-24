@@ -14,11 +14,13 @@ class Form_Builder
 	 * @return void
 	 */
 	
-	public function __construct() {
+	public function __construct() 
+	{
         $this->add_menu_item();
 	}
 
-    public function add_menu_item() {
+    public function add_menu_item() 
+	{
         add_action('admin_menu', function () {
             add_menu_page(
                 'Form Builder',
@@ -59,15 +61,18 @@ class Form_Builder
         });
     }
 	
-	public function list_page(){
+	public function list_page()
+	{
 		require_once __DIR__ . '/list/index.php';
     }
 
-	public function create_page(){
+	public function create_page()
+	{
 		require_once __DIR__ . '/create/index.php';
 	}
 
-	public function settings_page(){
+	public function settings_page()
+	{
 		require_once __DIR__ . '/settings/index.php';
 	}
 	

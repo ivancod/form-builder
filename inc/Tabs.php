@@ -16,7 +16,8 @@ class FB_Tabs
 	 * @return void
 	 */
 
-	public function __construct( $page, $data ) {
+	public function __construct( $page, $data ) 
+	{
         $this->page = $page;
         $this->data = $data;
         $this->current = isset( $_GET['tab'] ) ? (int) $_GET['tab'] : 0;
@@ -28,7 +29,8 @@ class FB_Tabs
      * @return Void
      */
 
-	public function display() {
+	public function display() 
+	{
 	  	?>
 		<div class="tab-wrap">
             <nav class="nav-tab-wrapper">
@@ -48,7 +50,8 @@ class FB_Tabs
      * @return Void
      */
 
-	public function nav() {
+	public function nav() 
+	{
 		for($i = 0; $i < count( $this->data ); $i++) { ?>
             <a href="?page=<?= $this->page ?>&tab=<?= $i ?>" class="nav-tab <?= ($this->current === $i) ? 'nav-tab-active' : '' ?>"> 
 				<?= $this->data[ $i ]['title'] ?>
@@ -62,7 +65,8 @@ class FB_Tabs
      * @return Void
      */
 
-	public function content() {
+	public function content() 
+	{
 		echo $this->data[ $this->current ]['content'];
 	}
 }
