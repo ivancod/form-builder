@@ -5,14 +5,14 @@ if( ! class_exists( 'WP_List_Table' ) ) {
     require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
 }
 
-if( ! class_exists( 'VS_Get_Data' ) ) {
+if( ! class_exists( 'VSFB_Get_Data' ) ) {
     require_once __DIR__ . '/GetData.php';
 }
 
 /**
  * Create a new table class that will extend the WP_List_Table
  */
-class VS_List_Table extends WP_List_Table
+class VSFB_List_Table extends WP_List_Table
 {
     /**
      * Prepare the items for the table to process
@@ -25,7 +25,7 @@ class VS_List_Table extends WP_List_Table
         $hidden = $this->get_hidden_columns();
         $sortable = $this->get_sortable_columns();
         
-        $GetData = new VS_Get_Data();
+        $GetData = new VSFB_Get_Data();
         $data = $GetData->data();
         usort( $data, array( &$this, 'sort_data' ) );
 

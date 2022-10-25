@@ -4,7 +4,7 @@
  * VS_Get_Data class will create the page to load the table
  */
 
-class VS_Get_Data
+class VSFB_Get_Data
 {
     /**
      * Get the table data

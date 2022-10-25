@@ -1,10 +1,10 @@
 <?php
 
 /**
- * VS_Email class will create the page to load the table
+ * VSFB_Email class will create the page to load the table
  */
 
-class VS_Email
+class VSFB_Email
 {
     /**
      * Get the table data
@@ -14,7 +14,18 @@ class VS_Email
 
     public function view()
     {
-        $result = "Email123";
+        $result = " <form>
+                        <table class='form-table' role='presentation'>
+                            <tbody>
+                                <tr class='form-field'>
+                                    <th scope='row'><label for='email'>E-mail</label></th>
+                                    <td><input name='email' type='email'></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                    </form>";
+        return $result;
 
         return $result;
     }

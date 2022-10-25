@@ -1,7 +1,7 @@
 <?php
 
 // Start up the engine
-class Form_Builder
+class VS_FormBuilder
 {
 	public $plugin_slug = 'form-builder';
 	public $create_slug = 'form-builder-create';
@@ -78,4 +78,4 @@ class Form_Builder
 	
 }
 
-new Form_Builder();
+new VS_FormBuilder();

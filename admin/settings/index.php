@@ -1,12 +1,12 @@
 <?php
-require_once ( ABSPATH . 'wp-content/plugins/form-builder/admin/Tabs.php' );
+require_once ( ABSPATH . 'wp-content/plugins/form-builder/inc/Tabs.php' );
 require_once __DIR__ . '/General.php';
 require_once __DIR__ . '/Email.php';
 
-$General = new VS_General();
-$Email   = new VS_Email();
+$General = new VSFB_General();
+$Email   = new VSFB_Email();
 
-$Tabs = new FB_Tabs('form-builder-settings', [
+$Tabs = new VSFB_Tabs('form-builder-settings', [
     [ 'title' => 'General', 'content' => $General->view() ],
     [ 'title' => 'E-mail', 'content' => $Email->view() ],
 ]);

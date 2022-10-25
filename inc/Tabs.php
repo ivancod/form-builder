@@ -4,7 +4,7 @@
  * FB_Tabs class will create the tabs
  */
 
-class FB_Tabs
+class VSFB_Tabs
 {
 	public $current = 0;
 	public $page;

@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/ListTable.php';
 
-$Table = new VS_List_Table();
+$Table = new VSFB_List_Table();
 $Table->prepare_items();
 
 ?>
