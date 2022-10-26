@@ -32,14 +32,17 @@ class VSFB_Tabs
 	public function display() 
 	{
 	  	?>
-		<div class="tab-wrap">
-            <nav class="nav-tab-wrapper">
+		<div class="privacy-settings-header">
+			<div class="privacy-settings-title-section">
+				<h1>Privacy</h1>
+			</div>
+
+			<nav class="privacy-settings-tabs-wrapper hide-if-no-js" aria-label="Secondary menu">
 			    <? $this->nav() ?>
 			</nav>
-
-			<div class="tab-content">
-				<? $this->content() ?>
-			</div>
+		</div>
+		<div class="tab-content">
+			<? $this->content() ?>
 		</div>
 	  	<?
 	}
@@ -53,7 +56,7 @@ class VSFB_Tabs
 	public function nav() 
 	{
 		for($i = 0; $i < count( $this->data ); $i++) { ?>
-            <a href="?page=<?= $this->page ?>&tab=<?= $i ?>" class="nav-tab <?= ($this->current === $i) ? 'nav-tab-active' : '' ?>"> 
+            <a href="?page=<?= $this->page ?>&tab=<?= $i ?>" class="privacy-settings-tab <?= ($this->current === $i) ? 'active' : '' ?>"> 
 				<?= $this->data[ $i ]['title'] ?>
 			</a>
 		<? }
@@ -67,6 +70,6 @@ class VSFB_Tabs
 
 	public function content() 
 	{
-		echo $this->data[ $this->current ]['content'];
+		return $this->data[ $this->current ]['content'];
 	}
 }

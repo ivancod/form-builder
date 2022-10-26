@@ -55,8 +55,7 @@ class VSFB_DataBase
                         `user_id` int(11) NOT NULL,
                         `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `desc` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `status` int(11) NOT NULL,
-                        `updated_at` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL
+                        `status` int(11) NOT NULL
                     ) ENGINE=InnoDB";
 
         $result[] = "CREATE TABLE IF NOT EXISTS `{ $prefix }fb_quest_answers` (
@@ -64,8 +63,7 @@ class VSFB_DataBase
                         `quest_id` int(11) NOT NULL,
                         `block_id` int(11) NOT NULL,
                         `fill_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `date` int(12) NOT NULL,
-                        `created_at` timestamp NULL DEFAULT NULL
+                        `date` datetime NOT NULL
                     ) ENGINE=InnoDB";
 
         $result[] = "CREATE TABLE IF NOT EXISTS `{ $prefix }fb_quest_blocks` (
@@ -86,16 +84,14 @@ class VSFB_DataBase
                         `ask_1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `ask_2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `ask_3` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `ask_4` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `updated_at` int(32) NOT NULL
+                        `ask_4` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
                     ) ENGINE=InnoDB";
 
         $result[] = "CREATE TABLE IF NOT EXISTS `{ $prefix }fb_block_desc` (
                         `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
                         `quest_id` int(11) NOT NULL,
                         `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `desc` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `updated_at` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL
+                        `desc` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
                     ) ENGINE=InnoDB";
 
         $result[] = "CREATE TABLE IF NOT EXISTS `{ $prefix }fb_block_rating` (
@@ -110,8 +106,7 @@ class VSFB_DataBase
                         `ask_1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `ask_2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `ask_3` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `ask_4` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `updated_at` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL
+                        `ask_4` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
                     ) ENGINE=InnoDB";
 
         $result[] = "CREATE TABLE IF NOT EXISTS `{ $prefix }fb_block_text` (
@@ -120,16 +115,14 @@ class VSFB_DataBase
                         `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `desc` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `required` int(11) NOT NULL,
-                        `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `updated_at` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL
+                        `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
                     ) ENGINE=InnoDB";
 
         $result[] = "CREATE TABLE IF NOT EXISTS `{ $prefix }fb_block_title` (
                         `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
                         `quest_id` int(11) NOT NULL,
                         `user_id` int(11) NOT NULL,
-                        `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `updated_at` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL
+                        `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
                     ) ENGINE=InnoDB";
 
         $result[] = "CREATE TABLE IF NOT EXISTS `{ $prefix }fb_ans_check` (
@@ -143,8 +136,7 @@ class VSFB_DataBase
                         `ask_2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `ask_3` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `ask_4` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `date` int(12) NOT NULL,
-                        `updated_at` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL
+                        `date` datetime NOT NULL
                     ) ENGINE=InnoDB";
 
         $result[] = "CREATE TABLE IF NOT EXISTS `{ $prefix }fb_ans_rating` (
@@ -158,8 +150,7 @@ class VSFB_DataBase
                         `ask_2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `ask_3` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `ask_4` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `updated_at` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `date` int(12) NOT NULL
+                        `date` datetime NOT NULL
                     ) ENGINE=InnoDB";
 
         $result[] = "CREATE TABLE IF NOT EXISTS `{ $prefix }fb_ans_text` (
@@ -168,8 +159,7 @@ class VSFB_DataBase
                         `block_id` int(11) NOT NULL,
                         `fill_id` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `val` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `updated_at` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `date` int(12) NOT NULL
+                        `date` datetime NOT NULL
                     ) ENGINE=InnoDB";
 
         return $result;

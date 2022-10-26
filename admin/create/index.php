@@ -2,8 +2,14 @@
 
 ?>
 
+<div class="privacy-settings-header" style="margin-left: -20px">
+    <div class="privacy-settings-title-section">
+        <h1><?= esc_html( get_admin_page_title() ) ?></h1>
+    </div>
+</div>
+
 <div class="wrap">
-    <h1><?= esc_html( get_admin_page_title() ) ?></h1>
+
 
     <form action="">
         <table class="form-table" role="presentation">
@@ -32,7 +38,8 @@
                     <p>PHP is the programming language used to build and maintain WordPress. </p>
                 </div>
             </div>
-        
+
+            <input type="submit" name="submit" id="set-page" class="button button-primary" value="Save">
     </form>
 
 </div>

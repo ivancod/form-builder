@@ -7,14 +7,26 @@ $General = new VSFB_General();
 $Email   = new VSFB_Email();
 
 $Tabs = new VSFB_Tabs('form-builder-settings', [
-    [ 'title' => 'General', 'content' => $General->view() ],
-    [ 'title' => 'E-mail', 'content' => $Email->view() ],
+    [ 'title' => 'General', 'content' => $General ],
+    [ 'title' => 'E-mail', 'content' => $Email ],
 ]);
 
 ?>
 
-<div class="wrap">
-    <h1><?= esc_html( get_admin_page_title() ) ?></h1>
+    
 
-    <? $Tabs->display() ?>
+<div class="privacy-settings-header" style="margin-left: -20px">
+    <div class="privacy-settings-title-section">
+        <h1><?= esc_html( get_admin_page_title() ) ?></h1>
+    </div>
+
+    <nav class="privacy-settings-tabs-wrapper hide-if-no-js" aria-label="Secondary menu">
+        <? $Tabs->nav() ?>
+    </nav>
 </div>
+
+<div class="tab-content">
+    <? $Tabs->content()->view() ?>
+</div>
+
+
