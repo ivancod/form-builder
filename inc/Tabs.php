@@ -56,7 +56,7 @@ class VSFB_Tabs
 	public function nav() 
 	{
 		for($i = 0; $i < count( $this->data ); $i++) { ?>
-            <a href="?page=<?= $this->page ?>&tab=<?= $i ?>" class="privacy-settings-tab <?= ($this->current === $i) ? 'active' : '' ?>"> 
+            <a href="?page=<?= $this->page ?>&tab=<?= $i ?>" class="nav-tab <?= ($this->current === $i) ? 'nav-tab-active' : '' ?>"> 
 				<?= $this->data[ $i ]['title'] ?>
 			</a>
 		<? }

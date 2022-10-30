@@ -1,19 +1,37 @@
 <?php
 require_once __DIR__ . '/ListTable.php';
 
-$Table = new VSFB_List_Table();
-$Table->prepare_items();
 
-?>
+/**
+ * VSFB_List class will create the page to load the settings
+ */
 
-<div class="privacy-settings-header" style="margin-left: -20px">
-    <div class="privacy-settings-title-section">
-        <h1><?= esc_html( get_admin_page_title() ) ?></h1>
-    </div>
-</div>
+class VSFB_List
+{
+	/**
+	 * This is our constructor
+	 *
+	 * @return void
+	 */
 
-<div class="wrap">
-    <div class="tab-content">
-        <? $Table->display() ?>
-    </div>
-</div>
+	public function __construct() 
+	{
+        $Table = new VSFB_List_Table();
+        $Table->prepare_items();
+
+        $this->view($Table);
+	}
+
+    /**
+     * Get the table data
+     *
+     * @return String
+     */
+
+    public function view($Table)
+    { 
+        require_once (ABSPATH . 'wp-content/plugins/form-builder/admin/views/list/index.php');
+    }
+}
+    
+new VSFB_List();
