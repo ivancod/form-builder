@@ -10,6 +10,8 @@ require_once __DIR__ . '/Styles.php';
 
 class VSFB_Settings
 {
+    public $view_path = ABSPATH . 'wp-content/plugins/form-builder/admin/views';
+
 	/**
 	 * This is our constructor
 	 *
@@ -19,9 +21,18 @@ class VSFB_Settings
 	public function __construct() 
 	{
         $Tabs = new VSFB_Tabs('form-builder-settings', [
-            [ 'title' => 'General', 'content' => new VSFB_Settings_General() ],
-            [ 'title' => 'Styles', 'content' => new VSFB_Settings_Styles() ],
-            [ 'title' => 'E-mail', 'content' => new VSFB_Settings_Email() ],
+            [
+                'title' => 'General',
+                'content' => new VSFB_Settings_General(),
+            ],
+            [
+                'title' => 'Styles',
+                'content' => new VSFB_Settings_Styles(),
+            ],
+            [
+                'title' => 'E-mail',
+                'content' => new VSFB_Settings_Email(),
+            ],
         ]);
 
         $this->view($Tabs);
@@ -35,7 +46,7 @@ class VSFB_Settings
 
     public function view($Tabs)
     { 
-        require_once (ABSPATH . 'wp-content/plugins/form-builder/admin/views/settings/index.php');
+        require_once ($this->view_path . '/settings/index.php');
     }
 }
     

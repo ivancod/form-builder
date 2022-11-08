@@ -30,8 +30,7 @@ class VSFB_Tabs
      */
 
 	public function display() 
-	{
-	  	?>
+	{ ?>
 		<div class="privacy-settings-header">
 			<div class="privacy-settings-title-section">
 				<h1>Privacy</h1>
@@ -44,8 +43,7 @@ class VSFB_Tabs
 		<div class="tab-content">
 			<? $this->content() ?>
 		</div>
-	  	<?
-	}
+	<? }
 
 	/**
      * Override the parent columns method. Defines the columns to use in your listing table

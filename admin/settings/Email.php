@@ -6,6 +6,8 @@
 
 class VSFB_Settings_Email
 {
+    public $view_path = ABSPATH . 'wp-content/plugins/form-builder/admin/views';
+
     /**
      * Get the table data
      *
@@ -14,6 +16,6 @@ class VSFB_Settings_Email
 
     public function view()
     { 
-        require_once (ABSPATH . 'wp-content/plugins/form-builder/admin/views/settings/email.php');
+        require_once ($this->view_path . '/settings/email.php');
     }
 }

@@ -1,45 +1,36 @@
 <?php
 
-?>
 
-<div class="privacy-settings-header" style="margin-left: -20px">
-    <div class="privacy-settings-title-section">
-        <h1><?= esc_html( get_admin_page_title() ) ?></h1>
-    </div>
-</div>
+/**
+ * VSFB_Create class will create the page to load the settings
+ */
 
-<div class="wrap">
+class VSFB_Create
+{
+    public $view_path = ABSPATH . 'wp-content/plugins/form-builder/admin/views';
 
+	/**
+	 * This is our constructor
+	 *
+	 * @return void
+	 */
 
-    <form action="">
-        <table class="form-table" role="presentation">
-            <tbody>
-                <tr class="form-field form-required">
-                    <th scope="row"><label for="title">Title<span class="description"> *</span></label></th>
-                    <td><input name="title" type="text" aria-required="true" maxlength="60"></td>
-                </tr>
-                <tr class="form-field">
-                    <th scope="row"><label for="desc">Description<span class="description"></span></label></th>
-                    <td><textarea name="desc"></textarea></td>
-                </tr>
-            </tbody>
-        </table>
-        <hr>
-		
-			<div id="health-check-site-status-critical" class="health-check-accordion issues">
-                <h4 class="health-check-accordion-heading">
-                    <button aria-expanded="false" class="health-check-accordion-trigger" aria-controls="health-check-accordion-block-php_version" type="button">
-                        <span class="title">Your site is running an outdated version of PHP (7.3.9), which requires an update</span>
-                        <span class="badge blue">Security</span>
-                        <span class="icon"></span>
-                    </button>
-                </h4>
-                <div id="health-check-accordion-block-php_version" class="health-check-accordion-panel" hidden="hidden">
-                    <p>PHP is the programming language used to build and maintain WordPress. </p>
-                </div>
-            </div>
+	public function __construct() 
+	{
+        $this->view();
+	}
 
-            <input type="submit" name="submit" id="set-page" class="button button-primary" value="Save">
-    </form>
+    /**
+     * Get the table data
+     *
+     * @return String
+     */
 
-</div>
+    public function view()
+    { 
+        $view_path = ABSPATH . 'wp-content/plugins/form-builder/admin/views';
+        require_once ($view_path . '/create/index.php');
+    }
+}
+    
+new VSFB_Create();

@@ -17,6 +17,7 @@ class VS_FormBuilder
 	public function __construct() 
 	{
         $this->add_menu_item();
+        $this->add_scripts();
 	}
 
     public function add_menu_item() 
@@ -75,7 +76,26 @@ class VS_FormBuilder
 	{
 		require_once __DIR__ . '/settings/index.php';
 	}
-	
+
+	public function add_scripts() 
+	{
+		/*
+		* Included libs:
+		*	https://www.npmjs.com/package/accordion-js
+		*/ 
+		 
+		add_action( 'admin_enqueue_scripts', function () {
+			$path = '/' . PLUGINDIR .'/form-builder/public';
+			
+			// CSS
+			wp_enqueue_style( 'vsfb-admin-style', "{$path}/css/admin.css", array(), time() );
+			
+			// JS
+			wp_enqueue_script( 'vsfb-vue-script', "{$path}/js/lib/vue.js", array(), time(), true );
+			wp_enqueue_script( 'vsfb-admin-script', "{$path}/js/admin.js", array(), '1.0.0', true );
+		});
+	}
+
 }
 
 new VS_FormBuilder();
