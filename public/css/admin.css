@@ -1,84 +1,309 @@
+/*--------------------------------------------------------------------------------------------
+*
+*	Vars
+*
+*--------------------------------------------------------------------------------------------*/
+* {
+  box-sizing: border-box;
+  outline: none;
+}
 
-* {box-sizing: border-box;outline: none;}
+.tx-up {
+  text-transform: uppercase;
+}
 
-.tx-up {text-transform: uppercase;}
-.tx-right { text-align: right }
+.tx-right {
+  text-align: right;
+}
 
-.flex {display: -webkit-flex; display: -moz-flex; display: -ms-flex; display: -o-flex; display: flex;}
-.jc-sb  {justify-content: space-between;}
-.jc-sa  {justify-content: space-around; height: auto;}
-.jc-fe  {justify-content: flex-end;}
-.jc-c   {justify-content: center;}
-.jc-fs  {justify-content: flex-start;}
-.jc-fe  {justify-content: flex-end;}
-.fd-c   {flex-direction: column;}
-.ai-c   {-ms-align-items: center; align-items: center;}
-.ai-fe  {-ms-align-items: flex-end; align-items: flex-end;}
+.flex {
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+}
+
+.jc-sb {
+  justify-content: space-between;
+}
+
+.jc-sa {
+  justify-content: space-around;
+  height: auto;
+}
+
+.jc-fe {
+  justify-content: flex-end;
+}
+
+.jc-c {
+  justify-content: center;
+}
+
+.jc-fs {
+  justify-content: flex-start;
+}
+
+.jc-fe {
+  justify-content: flex-end;
+}
+
+.fd-c {
+  flex-direction: column;
+}
+
+.ai-c {
+  -ms-align-items: center;
+  align-items: center;
+}
+
+.ai-fe {
+  -ms-align-items: flex-end;
+  align-items: flex-end;
+}
 
 /*-----------------------SECTION NAVIGATION------------------------*/
-#vsfb-builder form {
-    width: 100%;
-    max-width: 600px;
-}
-.wrap-blocks .block {
-    background-color: #fff;
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.block-head .title {
-    width: 100%;
-    margin: 0;
-}
-
-.block-head .delete {
-    margin-right: 10px;
-    cursor: pointer;
-}
-
-.block-head .copy {
-    margin-right: 10px;
-    cursor: pointer;
-}
-.block-head .dashicons-arrow-down-alt2 {
-    width: 15px;
-    height: 15px;
-    cursor: pointer;
-
-}
-
 .rating-item-title, .rating-item-title input,
 .check-item-title, .check-item-title input {
-    width: 100%;
-}
-.rating-item-title b, .check-item-title b{
-    padding-top: 2px;
-    padding-right: 10px;
-    font-size: 18px;
+  width: 100%;
 }
 
-.rating-item-icons {
-    width: 175px;
-    margin-left: 5px;
-    padding: 17px 0;
-}
-.check-item-icons {
-    width: 35px;
-    margin-left: 5px;
-    padding: 17px 0;
-}
-#vsfb-builder .rating-add-item,
-#vsfb-builder .check-add-item {
-    margin: 0 auto;
-}
-.rating-add-item span,
-.check-add-item span {
-    margin-top: 4px;
+.rating-item-title b, .check-item-title b {
+  padding-top: 2px;
+  padding-right: 10px;
+  font-size: 16px;
 }
 
-.rating-item-icons .dashicons-trash,
-.check-item-icons .dashicons-trash {
-    margin-right: 10px;
-    cursor: pointer;
+#vsfb-builder {
+  /*---------------------------------------------------------------------------------------------
+  *
+  *  All Inputs
+  *
+  *---------------------------------------------------------------------------------------------*/
 }
+#vsfb-builder form {
+  width: 100%;
+  max-width: 600px;
+}
+#vsfb-builder .wrap-blocks {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.1);
+}
+#vsfb-builder .wrap-blocks .head {
+  font-size: 16px;
+  font-weight: 400;
+  min-height: 64px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-right: 24px;
+  padding-left: 24px;
+}
+#vsfb-builder .wrap-blocks .head span {
+  font-weight: 700;
+}
+#vsfb-builder .wrap-blocks .block {
+  width: 100%;
+  border-top: 1px solid #EAECF0;
+}
+#vsfb-builder .wrap-blocks .block.active {
+  border-top: 1px solid #A5D2E7;
+}
+#vsfb-builder .wrap-blocks .block.active .block-head {
+  background: #D8EBF5;
+}
+#vsfb-builder .wrap-blocks .block.active .block-head:hover {
+  background: #D8EBF5;
+}
+#vsfb-builder .wrap-blocks .block .block-head {
+  cursor: pointer;
+  padding: 8px 25px;
+}
+#vsfb-builder .wrap-blocks .block .block-head .actions {
+  width: 100%;
+  color: #0783BE;
+}
+#vsfb-builder .wrap-blocks .block .block-head .actions .title {
+  margin: 5px 0;
+}
+#vsfb-builder .wrap-blocks .block .block-head .actions .title:hover {
+  text-decoration: underline;
+}
+#vsfb-builder .wrap-blocks .block .block-head .actions span {
+  margin-right: 0;
+  padding-left: 10px;
+  padding-bottom: 5px;
+}
+#vsfb-builder .wrap-blocks .block .block-head .actions span:hover {
+  text-decoration: underline;
+}
+#vsfb-builder .wrap-blocks .block .block-head .actions .copy {
+  color: #DA5A39;
+}
+#vsfb-builder .wrap-blocks .block .block-head:hover {
+  background-color: #f7fbfd;
+}
+#vsfb-builder .wrap-blocks .block .block-content {
+  border-top: 1px solid #EAECF0;
+  border-left: 4px solid #6BB5D8;
+  padding: 10px 25px 15px;
+}
+#vsfb-builder .wrap-blocks .block .block-content .add-item span {
+  margin: 4px 0 0 8px;
+}
+#vsfb-builder .wrap-blocks .block .block-content .list p {
+  margin: 0;
+  position: relative;
+  width: 100%;
+}
+#vsfb-builder .wrap-blocks .block .block-content .list p b {
+  font-size: 14px;
+}
+#vsfb-builder .wrap-blocks .block .block-content .list p input {
+  margin-left: 10px;
+  padding-right: 30px;
+}
+#vsfb-builder .wrap-blocks .block .block-content .list p .dashicons-no {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  border: 1px solid #3c434a;
+  opacity: 0.6;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  transform: translateY(-50%);
+  z-index: 1;
+  transition: opacity 0.4s;
+}
+#vsfb-builder .wrap-blocks .block .block-content .list p .dashicons-no:hover {
+  border: 1px solid #0783BE;
+  color: #0783BE;
+  opacity: 1;
+}
+#vsfb-builder .wrap-blocks .block .block-content .list .item-icons {
+  width: 100px;
+  margin-left: 10px;
+  flex-shrink: 0;
+}
+#vsfb-builder .wrap-blocks .block .block-content .block-footer {
+  margin-top: 15px;
+}
+#vsfb-builder .wrap-blocks .block .block-content hr {
+  opacity: 0.8;
+  margin: 15px -25px;
+}
+#vsfb-builder input[type=text],
+#vsfb-builder input[type=search],
+#vsfb-builder input[type=number],
+#vsfb-builder textarea,
+#vsfb-builder select {
+  box-sizing: border-box;
+  height: 40px;
+  background-color: #fff;
+  border-color: #D0D5DD;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.1);
+  border-radius: 6px;
+  color: #044E71;
+  margin-right: 0;
+  margin-left: 0;
+  width: 100%;
+}
+#vsfb-builder input[type=text]:focus,
+#vsfb-builder input[type=search]:focus,
+#vsfb-builder input[type=number]:focus,
+#vsfb-builder textarea:focus,
+#vsfb-builder select:focus {
+  outline: 3px solid #EBF5FA;
+  border-color: #399CCB;
+}
+#vsfb-builder input[type=text]:disabled,
+#vsfb-builder input[type=search]:disabled,
+#vsfb-builder input[type=number]:disabled,
+#vsfb-builder textarea:disabled,
+#vsfb-builder select:disabled {
+  background-color: #F9FAFB;
+  color: #09a5ef;
+}
+#vsfb-builder input[type=text]::-moz-placeholder, #vsfb-builder input[type=search]::-moz-placeholder, #vsfb-builder input[type=number]::-moz-placeholder, #vsfb-builder textarea::-moz-placeholder, #vsfb-builder select::-moz-placeholder {
+  color: #399CCB;
+}
+#vsfb-builder input[type=text]:-ms-input-placeholder, #vsfb-builder input[type=search]:-ms-input-placeholder, #vsfb-builder input[type=number]:-ms-input-placeholder, #vsfb-builder textarea:-ms-input-placeholder, #vsfb-builder select:-ms-input-placeholder {
+  color: #399CCB;
+}
+#vsfb-builder input[type=text]::placeholder,
+#vsfb-builder input[type=search]::placeholder,
+#vsfb-builder input[type=number]::placeholder,
+#vsfb-builder textarea::placeholder,
+#vsfb-builder select::placeholder {
+  color: #399CCB;
+}
+#vsfb-builder input[type=text], #vsfb-builder input[type=email], #vsfb-builder textarea {
+  box-sizing: border-box;
+  height: 40px;
+  padding-right: 12px;
+  padding-left: 12px;
+  background-color: #fff;
+  border-color: #D0D5DD;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.1);
+  border-radius: 6px;
+  color: #344054;
+}
+#vsfb-builder textarea {
+  box-sizing: border-box;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 80px;
+  min-height: 56px;
+}
+#vsfb-builder select {
+  min-width: 160px;
+  max-width: 100%;
+  padding-right: 40px;
+  padding-left: 12px;
+  background-image: url("../img/ico/icon-chevron-down.svg");
+  background-position: right 10px top 50%;
+  background-size: 20px;
+}
+#vsfb-builder select:hover, #vsfb-builder select:focus {
+  color: #0783BE;
+}
+#vsfb-builder select::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+}
+#vsfb-builder .button {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding-right: 16px;
+  padding-left: 16px;
+  background-color: transparent;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #0783BE;
+  border-radius: 6px;
+  color: #0783BE;
+}
+#vsfb-builder .wrap-add-block {
+  margin-top: 15px;
+}
+#vsfb-builder .wrap-add-block select {
+  width: 150px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+#vsfb-builder label p {
+  font-weight: 600;
+  font-size: 14px;
+}
+#vsfb-builder label p sup {
+  color: #DA5A39;
+  font-weight: 700;
+}/*# sourceMappingURL=admin.css.map */

@@ -5,65 +5,76 @@
 </div>
 
 <div id="vsfb-builder" class="flex jc-c">
+    <!-- <div @click="saveQuest" class="button button-primary">Save</div> -->
     <form action="">
-        <table class="form-table" role="presentation">
-            <tbody>
-                <tr class="form-field form-required">
-                    <th scope="row"><label for="title">Title<span class="description"> *</span></label></th>
-                    <td><input type="text" v-model="title"></td>
-                </tr>
-                <tr class="form-field">
-                    <th scope="row"><label for="desc">Description<span class="description"></span></label></th>
-                    <td><textarea name="desc"  v-model="desc"></textarea></td>
-                </tr>
-            </tbody>
-        </table>
-        <pre style="position: absolute;left: 0;">{{ blocks }}</pre>
-        
+        <label>
+            <p>Title <sup>*</sup></p>
+            <input type="text" v-model="title">
+        </label>
+        <label>
+            <p>Description</p>
+            <textarea v-model="desc" ></textarea>
+        </label>
+        <br><br>
         <hr>
-        <h2> -- Questions -- </h2>
-        <div class="wrap-blocks" v-for="(block, index) in blocks">
-            <section class="block block-title">
+        <br>
+        <!-- <pre style="position: absolute;left: 0;">{{ blocks }}</pre> -->
+        
+        <div class="wrap-blocks" >
+            <div class="head">
+                <span>Form Questions</span>
+            </div>
+            <section class="block" 
+                v-bind:class="block.show ? 'active' : ''" 
+                v-for="(block, index) in blocks">
                 <!------------------------ TITLE ------------------------>
                 <div class="block-head flex">
-                    <h4 class="title">{{ index + 1 }} Block {{ block.type }}</h4>
-                    <span class="delete" @click="deleteBlock(index)"> <span class="dashicons dashicons-trash"></span> </span>
-                    <span class="copy" @click="copyBlock(index)">Copy <span class="dashicons dashicons-copy"></span></span>
-                    <span class="dashicons-before dashicons-arrow-{{ block.show ? 'down' : 'up' }}-alt2" @click="block.show = !block.show"></span>
+                    <div class="actions">
+                        <h4 class="title" @click="blocks[index].show = true">{{ index + 1 }}  {{ block.label }}</h4>
+                        <div class="flex">
+                            <span class="edit" @click="blocks[index].show = true">Edit</span>
+                            <span class="delete" @click="copyBlock(index)">Duplicate</span>
+                            <span class="copy" @click="deleteBlock(index)">Delete</span>
+                        </div>
+                    </div>
+                    <span class="dashicons-before" v-bind:class="blocks[index].show ? 'dashicons-arrow-up-alt2' : 'dashicons-arrow-down-alt2'" @click="blocks[index].show = !blocks[index].show"></span>
                 </div>
 
                 <!------------------------ CONTENT ------------------------>
-                <div class="block-content" v-if="block.show">
-                    <div class="text"  v-if="block.type === 'title'">
+                <div class="block-content" v-if="blocks[index].show">
+                    <div class="text" v-if="block.type === 'title'">
                         <? require_once ($view_path . '../blocks/title.php') ?>
                     </div>
-                    <div class="text"  v-if="block.type === 'desc'">
+                    <div class="text" v-if="block.type === 'desc'">
                         <? require_once ($view_path . '../blocks/desc.php') ?>
                     </div>
-                    <div class="text"  v-if="block.type === 'text'">
+                    <div class="text" v-if="block.type === 'text'">
                         <? require_once ($view_path . '../blocks/text.php') ?>
                     </div>
-                    <div class="text"  v-if="block.type === 'rating'">
+                    <div class="text" v-if="block.type === 'rating'">
                         <? require_once ($view_path . '../blocks/rating.php') ?>
                     </div>
-                    <div class="text"  v-if="block.type === 'check'">
+                    <div class="text" v-if="block.type === 'check'">
                         <? require_once ($view_path . '../blocks/check.php') ?>
+                    </div>
+                    <hr>
+                    <div class="block-footer flex">
+                        <div @click="blocks[index].show = false" class="button button-primary">Close Block</div>
                     </div>
                 </div>
             </section>
         </div>
-
         
-        <div class="privacy-settings-title-section">
+        <div class="wrap-add-block flex jc-c ai-c">
             <label for="page_for_privacy_policy">Select the type of block</label>
-            <select style="margin:10px 15px" v-model="select_type_block">
+            <select  v-model="select_type_block">
                 <option value="title">Title</option>
                 <option value="desc">Description</option>
                 <option value="text">Text field</option>
                 <option value="rating">Rating</option>
                 <option value="check">Checkboxes</option>
             </select>
-            <div @click="addBlock" class="button button-primary">Add block</div>
+            <div @click="addBlock" class="button button-primary" style="margin-bottom: 0px;">Add block</div>
         </div>
     </form>
 

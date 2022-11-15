@@ -1,31 +1,25 @@
 const { createApp } = Vue;
 
 const TMP_Blocks = {
-  title: { 
-    show: true,
+  title: {
     type: 'title',
-    required: false,
     value: "",
   },
   desc: {
-    show: true,
     type: 'desc',
     value: "",
   },
   rating: {
-    show: true,
     type: 'rating',
     title: "",
     list: [ "" ],
   },
   text: {
-    show: true,
     type: 'text',
     title: "",
     text_type: "email",
   },
   check:{
-    show: true,
     type: 'check',
     title: "",
     list: [ "" ],
@@ -33,14 +27,12 @@ const TMP_Blocks = {
 };
 
 createApp({
-  data() {
-    return {
+  data: () => ({
       title: "заголовок",
       desc: "desc",
       select_type_block: "title",
-      blocks: [ { show: true, type: 'title', required: false, value: "" } ]
-    }
-  },
+      blocks: [ { label: "(no label)", show: false, type: 'title', required: false, value: "" } ]
+  }),
   methods: {
     deleteBlock(i) {
       if(this.blocks.length < 2) return;
@@ -48,10 +40,19 @@ createApp({
       this.blocks.splice(i, 1);
     },
     copyBlock(i) {
-      this.blocks.splice(i, 0, this.blocks[i])
+      const block = Object.assign(this.blocks[i], {});
+
+      this.blocks.splice(i, 0, block);
     },
     addBlock() {
-      const block = Object.assign(TMP_Blocks[ this.select_type_block ], {})
+      const block = Object.assign(
+        TMP_Blocks[ this.select_type_block ], 
+        {
+          label: "(no label)",
+          show: false,
+          required: false,
+        }
+      );
 
       this.blocks.push( block );
     },
@@ -79,5 +80,10 @@ createApp({
 
       list.splice(item, 1);
     },
+
+    // Button
+    saveQuest() {
+      console.log(Object.assign(this.blocks, {}));
+    },
   }
-}).mount('#vsfb-builder')
+}).mount('#vsfb-builder');

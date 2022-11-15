@@ -1,26 +1,24 @@
 <div class="block-check">
-    <table class="form-table" role="presentation">
-        <tbody>
-            <tr class="form-field form-required">
-                <th scope="row"><label for="title">Question<span class="description"> *</span></label></th>
-                <td><input type="text" v-model="block.title"></td>
-            </tr>
-        </tbody>
-    </table>
+    <label>
+        <p>Field Label</p>
+        <input type="text" v-model="block.label">
+    </label>
+    <label>
+        <p>Field Question <sup>*</sup></p>
+        <input type="text" v-model="block.title">
+    </label>
     <hr>
-    <ul class="check-list">
+    <ul class="list">
         <li class="flex" v-for="(item, index) in block.list">
-            <p class="check-item-title flex">
+            <p class="item-title flex ai-c">
                 <b>{{index + 1}}. </b>
                 <input type="text" v-model="block.list[index]">
+                <span class="dashicons dashicons-no" @click="deleteCheckItem(block.list, index)"></span>
             </p>
-            <span class="check-item-icons">
-                <span class="dashicons dashicons-trash" @click="deleteCheckItem(block.list, index)"></span>
-            </span>
         </li>
     </ul>
-    <div class="flex">
-        <div @click="addCheckItem(block.list)" class="button button-primary check-add-item">
+    <div class="flex jc-c">
+        <div @click="addCheckItem(block.list)" class="button button-primary add-item">
             Add item
             <span class="dashicons dashicons-plus-alt"></span>
         </div>
