@@ -85,5 +85,10 @@ createApp({
     saveQuest() {
       console.log(Object.assign(this.blocks, {}));
     },
+  },
+  mounted () {
+    axios
+      .get(ajaxurl + "?action=create_form")
+      .then(response => console.log(response))
   }
 }).mount('#vsfb-builder');

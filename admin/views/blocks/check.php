@@ -18,9 +18,9 @@
         </li>
     </ul>
     <div class="flex jc-c">
-        <div @click="addCheckItem(block.list)" class="button button-primary add-item">
+        <div @click="addCheckItem(block.list)" class="add-item">
             Add item
-            <span class="dashicons dashicons-plus-alt"></span>
+            <span class="dashicons dashicons-plus-alt2"></span>
         </div>
     </div>
 </div>

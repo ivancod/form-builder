@@ -3,6 +3,11 @@
 *	Vars
 *
 *--------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------
+*
+*	Basic options
+*
+*--------------------------------------------------------------------------------------------*/
 * {
   box-sizing: border-box;
   outline: none;
@@ -62,136 +67,18 @@
   align-items: flex-end;
 }
 
-/*-----------------------SECTION NAVIGATION------------------------*/
-.rating-item-title, .rating-item-title input,
-.check-item-title, .check-item-title input {
-  width: 100%;
-}
-
-.rating-item-title b, .check-item-title b {
-  padding-top: 2px;
-  padding-right: 10px;
-  font-size: 16px;
-}
-
+/*-----------------------SECTION VS-FORM-BUILDER------------------------*/
 #vsfb-builder {
   /*---------------------------------------------------------------------------------------------
   *
   *  All Inputs
   *
   *---------------------------------------------------------------------------------------------*/
-}
-#vsfb-builder form {
-  width: 100%;
-  max-width: 600px;
-}
-#vsfb-builder .wrap-blocks {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.1);
-}
-#vsfb-builder .wrap-blocks .head {
-  font-size: 16px;
-  font-weight: 400;
-  min-height: 64px;
-  padding-top: 25px;
-  padding-bottom: 25px;
-  padding-right: 24px;
-  padding-left: 24px;
-}
-#vsfb-builder .wrap-blocks .head span {
-  font-weight: 700;
-}
-#vsfb-builder .wrap-blocks .block {
-  width: 100%;
-  border-top: 1px solid #EAECF0;
-}
-#vsfb-builder .wrap-blocks .block.active {
-  border-top: 1px solid #A5D2E7;
-}
-#vsfb-builder .wrap-blocks .block.active .block-head {
-  background: #D8EBF5;
-}
-#vsfb-builder .wrap-blocks .block.active .block-head:hover {
-  background: #D8EBF5;
-}
-#vsfb-builder .wrap-blocks .block .block-head {
-  cursor: pointer;
-  padding: 8px 25px;
-}
-#vsfb-builder .wrap-blocks .block .block-head .actions {
-  width: 100%;
-  color: #0783BE;
-}
-#vsfb-builder .wrap-blocks .block .block-head .actions .title {
-  margin: 5px 0;
-}
-#vsfb-builder .wrap-blocks .block .block-head .actions .title:hover {
-  text-decoration: underline;
-}
-#vsfb-builder .wrap-blocks .block .block-head .actions span {
-  margin-right: 0;
-  padding-left: 10px;
-  padding-bottom: 5px;
-}
-#vsfb-builder .wrap-blocks .block .block-head .actions span:hover {
-  text-decoration: underline;
-}
-#vsfb-builder .wrap-blocks .block .block-head .actions .copy {
-  color: #DA5A39;
-}
-#vsfb-builder .wrap-blocks .block .block-head:hover {
-  background-color: #f7fbfd;
-}
-#vsfb-builder .wrap-blocks .block .block-content {
-  border-top: 1px solid #EAECF0;
-  border-left: 4px solid #6BB5D8;
-  padding: 10px 25px 15px;
-}
-#vsfb-builder .wrap-blocks .block .block-content .add-item span {
-  margin: 4px 0 0 8px;
-}
-#vsfb-builder .wrap-blocks .block .block-content .list p {
-  margin: 0;
-  position: relative;
-  width: 100%;
-}
-#vsfb-builder .wrap-blocks .block .block-content .list p b {
-  font-size: 14px;
-}
-#vsfb-builder .wrap-blocks .block .block-content .list p input {
-  margin-left: 10px;
-  padding-right: 30px;
-}
-#vsfb-builder .wrap-blocks .block .block-content .list p .dashicons-no {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  border: 1px solid #3c434a;
-  opacity: 0.6;
-  border-radius: 50%;
-  font-size: 18px;
-  cursor: pointer;
-  transform: translateY(-50%);
-  z-index: 1;
-  transition: opacity 0.4s;
-}
-#vsfb-builder .wrap-blocks .block .block-content .list p .dashicons-no:hover {
-  border: 1px solid #0783BE;
-  color: #0783BE;
-  opacity: 1;
-}
-#vsfb-builder .wrap-blocks .block .block-content .list .item-icons {
-  width: 100px;
-  margin-left: 10px;
-  flex-shrink: 0;
-}
-#vsfb-builder .wrap-blocks .block .block-content .block-footer {
-  margin-top: 15px;
-}
-#vsfb-builder .wrap-blocks .block .block-content hr {
-  opacity: 0.8;
-  margin: 15px -25px;
+  /*---------------------------------------------------------------------------------------------
+  *
+  *  Other options
+  *
+  *---------------------------------------------------------------------------------------------*/
 }
 #vsfb-builder input[type=text],
 #vsfb-builder input[type=search],
@@ -306,4 +193,131 @@
 #vsfb-builder label p sup {
   color: #DA5A39;
   font-weight: 700;
+}
+#vsfb-builder form {
+  width: 100%;
+  max-width: 600px;
+}
+#vsfb-builder .wrap-blocks {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.1);
+}
+#vsfb-builder .wrap-blocks .head {
+  font-size: 16px;
+  font-weight: 400;
+  min-height: 64px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-right: 24px;
+  padding-left: 24px;
+}
+#vsfb-builder .wrap-blocks .head span {
+  font-weight: 700;
+}
+#vsfb-builder .wrap-blocks .block {
+  width: 100%;
+  border-top: 1px solid #EAECF0;
+}
+#vsfb-builder .wrap-blocks .block.active {
+  border-top: 1px solid #A5D2E7;
+}
+#vsfb-builder .wrap-blocks .block.active .block-head {
+  background: #D8EBF5;
+}
+#vsfb-builder .wrap-blocks .block.active .block-head:hover {
+  background: #D8EBF5;
+}
+#vsfb-builder .wrap-blocks .block .block-head {
+  cursor: pointer;
+  padding: 8px 25px;
+}
+#vsfb-builder .wrap-blocks .block .block-head .actions {
+  width: 100%;
+  color: #0783BE;
+}
+#vsfb-builder .wrap-blocks .block .block-head .actions .title {
+  margin: 5px 0;
+}
+#vsfb-builder .wrap-blocks .block .block-head .actions .title:hover {
+  text-decoration: underline;
+}
+#vsfb-builder .wrap-blocks .block .block-head .actions span {
+  margin-right: 0;
+  padding-left: 10px;
+  padding-bottom: 5px;
+}
+#vsfb-builder .wrap-blocks .block .block-head .actions span:hover {
+  text-decoration: underline;
+}
+#vsfb-builder .wrap-blocks .block .block-head .actions .copy {
+  color: #DA5A39;
+}
+#vsfb-builder .wrap-blocks .block .block-head:hover {
+  background-color: #f7fbfd;
+}
+#vsfb-builder .wrap-blocks .block .block-content {
+  border-top: 1px solid #EAECF0;
+  border-left: 4px solid #6BB5D8;
+  padding: 10px 25px 15px;
+}
+#vsfb-builder .wrap-blocks .block .block-content .add-item {
+  cursor: pointer;
+}
+#vsfb-builder .wrap-blocks .block .block-content .add-item span {
+  margin: 3px 0 -3px;
+  font-size: 16px;
+  text-decoration: none;
+}
+#vsfb-builder .wrap-blocks .block .block-content .add-item:hover {
+  text-decoration: underline;
+}
+#vsfb-builder .wrap-blocks .block .block-content .list p {
+  margin: 0;
+  position: relative;
+  width: 100%;
+}
+#vsfb-builder .wrap-blocks .block .block-content .list p b {
+  font-size: 14px;
+}
+#vsfb-builder .wrap-blocks .block .block-content .list p input {
+  margin-left: 10px;
+  padding-right: 30px;
+}
+#vsfb-builder .wrap-blocks .block .block-content .list p .dashicons-no {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  border: 1px solid #3c434a;
+  opacity: 0.6;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  transform: translateY(-50%);
+  z-index: 1;
+  transition: opacity 0.4s;
+}
+#vsfb-builder .wrap-blocks .block .block-content .list p .dashicons-no:hover {
+  border: 1px solid #0783BE;
+  color: #0783BE;
+  opacity: 1;
+}
+#vsfb-builder .wrap-blocks .block .block-content .list .item-icons {
+  width: 100px;
+  margin-left: 10px;
+  flex-shrink: 0;
+}
+#vsfb-builder .wrap-blocks .block .block-content .block-footer {
+  margin-top: 15px;
+}
+#vsfb-builder .wrap-blocks .block .block-content hr {
+  opacity: 0.8;
+  margin: 15px -25px;
+}
+#vsfb-builder .add-quest {
+  background-color: #0783BE;
+  color: white;
+}
+#vsfb-builder .add-quest:hover {
+  background-color: #066998;
 }/*# sourceMappingURL=admin.css.map */

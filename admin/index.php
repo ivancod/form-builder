@@ -17,6 +17,7 @@ class VS_FormBuilder
 	public function __construct() 
 	{
         $this->add_menu_item();
+        $this->add_ajax();
         $this->add_scripts();
 	}
 
@@ -81,7 +82,8 @@ class VS_FormBuilder
 	{
 		/*
 		* Included libs:
-		*	https://www.npmjs.com/package/accordion-js
+		*	https://vuejs.org
+		*   https://axios-http.com/ru/docs/intro
 		*/ 
 		 
 		add_action( 'admin_enqueue_scripts', function () {
@@ -91,11 +93,18 @@ class VS_FormBuilder
 			wp_enqueue_style( 'vsfb-admin-style', "{$path}/css/admin.css", array(), time() );
 			
 			// JS
+			wp_localize_script( 'FrontEndAjax', 'ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 			wp_enqueue_script( 'vsfb-vue-script', "{$path}/js/lib/vue.js", array(), time(), true );
+			wp_enqueue_script( 'vsfb-axios-script', "{$path}/js/lib/axios.min.js", array(), time(), true );
 			wp_enqueue_script( 'vsfb-admin-script', "{$path}/js/admin.js", array(), '1.0.0', true );
+
 		});
 	}
 
+	public function add_ajax()
+	{
+		require_once __DIR__ . './Ajax.php';
+	}
 }
 
 new VS_FormBuilder();

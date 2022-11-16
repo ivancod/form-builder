@@ -74,7 +74,7 @@
                 <option value="rating">Rating</option>
                 <option value="check">Checkboxes</option>
             </select>
-            <div @click="addBlock" class="button button-primary" style="margin-bottom: 0px;">Add block</div>
+            <div @click="addBlock" class="button button-primary add-quest" style="margin-bottom: 0px;">Add block</div>
         </div>
     </form>
 
