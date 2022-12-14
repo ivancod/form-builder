@@ -3,21 +3,21 @@ const { createApp } = Vue;
 const TMP_Blocks = {
   title: {
     type: 'title',
-    value: "",
+    title: "",
   },
   desc: {
     type: 'desc',
-    value: "",
-  },
-  rating: {
-    type: 'rating',
     title: "",
-    list: [ "" ],
   },
   text: {
     type: 'text',
     title: "",
     text_type: "email",
+  },
+  rating: {
+    type: 'rating',
+    title: "",
+    list: [ "" ],
   },
   check:{
     type: 'check',
@@ -27,12 +27,14 @@ const TMP_Blocks = {
 };
 
 createApp({
+
   data: () => ({
       title: "заголовок",
       desc: "desc",
       select_type_block: "title",
-      blocks: [ { label: "(no label)", show: false, type: 'title', required: false, value: "" } ]
+      blocks: [ { label: "(no label)", show: false, type: 'title', required: 0, title: "" } ]
   }),
+
   methods: {
     deleteBlock(i) {
       if(this.blocks.length < 2) return;
@@ -50,7 +52,7 @@ createApp({
         {
           label: "(no label)",
           show: false,
-          required: false,
+          required: 0,
         }
       );
 
@@ -59,7 +61,7 @@ createApp({
 
     // Rating ---
     addRatingItem(list) {
-      if(list.length > 9) return;
+      if(list.length > 4) return;
 
       list.push("");
     },
@@ -71,7 +73,7 @@ createApp({
 
     // Check ---
     addCheckItem(list) {
-      if(list.length > 9) return;
+      if(list.length > 4) return;
 
       list.push("");
     },
@@ -83,12 +85,49 @@ createApp({
 
     // Button
     saveQuest() {
-      console.log(Object.assign(this.blocks, {}));
+      jQuery.ajax({
+        method: "POST",
+        url: ajaxurl,
+        data: {
+          action:"create_form",
+          quest: { 
+            title: Object.assign(this.title, {}),
+            desc: Object.assign(this.desc, {}),
+          },
+          blocks: Object.assign(this.blocks, {}),
+        },
+        success: res => { console.log(res) }
+      })
     },
   },
-  mounted () {
-    axios
-      .get(ajaxurl + "?action=create_form")
-      .then(response => console.log(response))
+  beforeMount () {
+    jQuery.ajax({
+      method: "GET",
+      url: ajaxurl,
+      data: {
+        action:"get_form",
+        id: 2,
+      },
+      success: res => { 
+        if( res.status !== "success" ) {
+          return alert("Error");
+        }
+        console.log(res);
+        this.title  = res.data.quest.title;
+        this.desc   = res.data.quest.desc;
+        this.blocks = res.data.blocks.map( i => {
+          if(i.type === "rating" || i.type === "check") {
+            i.list = [];
+            if(i.ask_0) i.list.push(i.ask_0);
+            if(i.ask_1) i.list.push(i.ask_1);
+            if(i.ask_2) i.list.push(i.ask_2);
+            if(i.ask_3) i.list.push(i.ask_3);
+            if(i.ask_4) i.list.push(i.ask_4);
+          }
+          return { show: false, ...i };
+        });
+        console.log(this);
+      }
+    })
   }
 }).mount('#vsfb-builder');

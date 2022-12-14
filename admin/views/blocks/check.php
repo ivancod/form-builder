@@ -8,6 +8,7 @@
         <input type="text" v-model="block.title">
     </label>
     <hr>
+    <p class="items-label">Answers to the question</p>
     <ul class="list">
         <li class="flex" v-for="(item, index) in block.list">
             <p class="item-title flex ai-c">

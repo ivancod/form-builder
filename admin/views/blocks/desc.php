@@ -5,6 +5,6 @@
     </label>
     <label>
         <p>Description <sup>*</sup></p>
-        <textarea v-model="block.value" ></textarea>
+        <textarea v-model="block.title" ></textarea>
     </label>
 </div>

@@ -5,7 +5,7 @@
 </div>
 
 <div id="vsfb-builder" class="flex jc-c">
-    <!-- <div @click="saveQuest" class="button button-primary">Save</div> -->
+    <div @click="saveQuest" class="button button-primary">Save</div>
     <form action="">
         <label>
             <p>Title <sup>*</sup></p>
@@ -32,7 +32,6 @@
                     <div class="actions">
                         <h4 class="title" @click="blocks[index].show = true">{{ index + 1 }}  {{ block.label }}</h4>
                         <div class="flex">
-                            <span class="edit" @click="blocks[index].show = true">Edit</span>
                             <span class="delete" @click="copyBlock(index)">Duplicate</span>
                             <span class="copy" @click="deleteBlock(index)">Delete</span>
                         </div>

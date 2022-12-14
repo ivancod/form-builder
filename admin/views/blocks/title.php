@@ -5,6 +5,6 @@
     </label>
     <label>
         <p>Field Value  <sup>*</sup></p>
-        <input type="text" v-model="block.value">
+        <input type="text" v-model="block.title">
     </label>
 </div>

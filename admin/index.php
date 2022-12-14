@@ -95,7 +95,6 @@ class VS_FormBuilder
 			// JS
 			wp_localize_script( 'FrontEndAjax', 'ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 			wp_enqueue_script( 'vsfb-vue-script', "{$path}/js/lib/vue.js", array(), time(), true );
-			wp_enqueue_script( 'vsfb-axios-script', "{$path}/js/lib/axios.min.js", array(), time(), true );
 			wp_enqueue_script( 'vsfb-admin-script', "{$path}/js/admin.js", array(), '1.0.0', true );
 
 		});

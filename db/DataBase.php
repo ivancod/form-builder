@@ -26,14 +26,20 @@ class VSFB_DataBase
      * @return String
      */
 
-    public function craete() 
+    public function create() 
     {
         global $wpdb;
 
+        // Create Tables
+
         $TABLES = $this->tables( $wpdb->prefix );
-        
-        foreach($TABLES as $query) {
-            $wpdb->query( $query );
+
+        try {
+            foreach($TABLES as $query) {
+                $wpdb->query( $query );
+            }
+        } catch (Exception $err) {
+            print_r([ 'status' => "error_create_tables", 'error' => $err ]);
         }
     }
 
@@ -42,7 +48,7 @@ class VSFB_DataBase
         global $wpdb;
 
         foreach($this->table_names as $name) {
-            $wpdb->query("DROP TABLE `{ $wpdb->prefix }{ $name }`");
+            $wpdb->query("DROP TABLE " . $wpdb->prefix . $name );
         }
     }
 
@@ -50,32 +56,41 @@ class VSFB_DataBase
     {   
         $result = [];
 
-        $result[] = "CREATE TABLE IF NOT EXISTS `{ $prefix }fb_quest` (
+        $result[] = "CREATE TABLE IF NOT EXISTS " . $prefix . "fb_quest (
                         `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
                         `user_id` int(11) NOT NULL,
                         `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `desc` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `status` int(11) NOT NULL
+                        `status` int(11) NOT NULL,
+                        `cteated_at` int(12) NOT NULL
                     ) ENGINE=InnoDB";
 
-        $result[] = "CREATE TABLE IF NOT EXISTS `{ $prefix }fb_quest_answers` (
+        $result[] = "CREATE TABLE IF NOT EXISTS " . $prefix . "fb_quest_answers (
                         `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
                         `quest_id` int(11) NOT NULL,
                         `block_id` int(11) NOT NULL,
                         `fill_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `date` datetime NOT NULL
+                        `date_start` int(12) NOT NULL,
+                        `date_end` int(12) NOT NULL,
+                        FOREIGN KEY (quest_id) 
+                        REFERENCES " . $prefix . "fb_quest(id) 
+                        ON DELETE CASCADE ON UPDATE CASCADE
                     ) ENGINE=InnoDB";
 
-        $result[] = "CREATE TABLE IF NOT EXISTS `{ $prefix }fb_quest_blocks` (
+        $result[] = "CREATE TABLE IF NOT EXISTS " . $prefix . "fb_quest_blocks (
                         `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
                         `quest_id` int(11) NOT NULL,
                         `block_id` int(11) NOT NULL,
-                        `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+                        `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+                        FOREIGN KEY (quest_id) 
+                        REFERENCES " . $prefix . "fb_quest(id) 
+                        ON DELETE CASCADE ON UPDATE CASCADE
                     ) ENGINE=InnoDB";
 
-        $result[] = "CREATE TABLE IF NOT EXISTS `{ $prefix }fb_block_check` (
+        $result[] = "CREATE TABLE IF NOT EXISTS " . $prefix . "fb_block_check (
                         `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
                         `quest_id` int(11) NOT NULL,
+                        `label` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `desc` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `required` int(11) NOT NULL,
@@ -84,19 +99,26 @@ class VSFB_DataBase
                         `ask_1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `ask_2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `ask_3` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `ask_4` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+                        `ask_4` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+                        FOREIGN KEY (quest_id) 
+                        REFERENCES " . $prefix . "fb_quest(id) 
+                        ON DELETE CASCADE ON UPDATE CASCADE
                     ) ENGINE=InnoDB";
 
-        $result[] = "CREATE TABLE IF NOT EXISTS `{ $prefix }fb_block_desc` (
+        $result[] = "CREATE TABLE IF NOT EXISTS " . $prefix . "fb_block_desc (
                         `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
                         `quest_id` int(11) NOT NULL,
+                        `label` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `desc` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+                        FOREIGN KEY (quest_id) 
+                        REFERENCES " . $prefix . "fb_quest(id) 
+                        ON DELETE CASCADE ON UPDATE CASCADE
                     ) ENGINE=InnoDB";
 
-        $result[] = "CREATE TABLE IF NOT EXISTS `{ $prefix }fb_block_rating` (
+        $result[] = "CREATE TABLE IF NOT EXISTS " . $prefix . "fb_block_rating (
                         `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
                         `quest_id` int(11) NOT NULL,
+                        `label` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `desc` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `required` int(11) NOT NULL,
@@ -106,40 +128,36 @@ class VSFB_DataBase
                         `ask_1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `ask_2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `ask_3` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `ask_4` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+                        `ask_4` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+                        FOREIGN KEY (quest_id) 
+                        REFERENCES " . $prefix . "fb_quest(id) 
+                        ON DELETE CASCADE ON UPDATE CASCADE
                     ) ENGINE=InnoDB";
 
-        $result[] = "CREATE TABLE IF NOT EXISTS `{ $prefix }fb_block_text` (
+        $result[] = "CREATE TABLE IF NOT EXISTS " . $prefix . "fb_block_text (
                         `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
                         `quest_id` int(11) NOT NULL,
+                        `label` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `desc` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `required` int(11) NOT NULL,
-                        `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+                        `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+                        FOREIGN KEY (quest_id) 
+                        REFERENCES " . $prefix . "fb_quest(id) 
+                        ON DELETE CASCADE ON UPDATE CASCADE
                     ) ENGINE=InnoDB";
 
-        $result[] = "CREATE TABLE IF NOT EXISTS `{ $prefix }fb_block_title` (
+        $result[] = "CREATE TABLE IF NOT EXISTS " . $prefix . "fb_block_title (
                         `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
                         `quest_id` int(11) NOT NULL,
-                        `user_id` int(11) NOT NULL,
-                        `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+                        `label` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+                        `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+                        FOREIGN KEY (quest_id) 
+                        REFERENCES " . $prefix . "fb_quest(id) 
+                        ON DELETE CASCADE ON UPDATE CASCADE
                     ) ENGINE=InnoDB";
 
-        $result[] = "CREATE TABLE IF NOT EXISTS `{ $prefix }fb_ans_check` (
-                        `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                        `quest_id` int(11) NOT NULL,
-                        `block_id` int(11) NOT NULL,
-                        `fill_id` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `comment` text COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `ask_0` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `ask_1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `ask_2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `ask_3` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `ask_4` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `date` datetime NOT NULL
-                    ) ENGINE=InnoDB";
-
-        $result[] = "CREATE TABLE IF NOT EXISTS `{ $prefix }fb_ans_rating` (
+        $result[] = "CREATE TABLE IF NOT EXISTS " . $prefix . "fb_ans_check (
                         `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
                         `quest_id` int(11) NOT NULL,
                         `block_id` int(11) NOT NULL,
@@ -150,16 +168,47 @@ class VSFB_DataBase
                         `ask_2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `ask_3` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `ask_4` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `date` datetime NOT NULL
+                        `date` int(12) NOT NULL,
+                        FOREIGN KEY (quest_id) 
+                        REFERENCES " . $prefix . "fb_quest(id) 
+                        ON DELETE CASCADE ON UPDATE CASCADE
                     ) ENGINE=InnoDB";
 
-        $result[] = "CREATE TABLE IF NOT EXISTS `{ $prefix }fb_ans_text` (
+        $result[] = "CREATE TABLE IF NOT EXISTS " . $prefix . "fb_ans_rating (
+                        `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                        `quest_id` int(11) NOT NULL,
+                        `block_id` int(11) NOT NULL,
+                        `fill_id` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+                        `comment` text COLLATE utf8mb4_unicode_ci NOT NULL,
+                        `ask_0` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+                        `ask_1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+                        `ask_2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+                        `ask_3` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+                        `ask_4` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+                        `date` int(12) NOT NULL,
+                        FOREIGN KEY (quest_id) 
+                        REFERENCES " . $prefix . "fb_quest(id) 
+                        ON DELETE CASCADE ON UPDATE CASCADE
+                    ) ENGINE=InnoDB";
+
+        $result[] = "CREATE TABLE IF NOT EXISTS " . $prefix . "fb_ans_text (
                         `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
                         `quest_id` int(11) NOT NULL,
                         `block_id` int(11) NOT NULL,
                         `fill_id` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `val` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `date` datetime NOT NULL
+                        `date` int(12) NOT NULL,
+                        FOREIGN KEY (quest_id) 
+                        REFERENCES " . $prefix . "fb_quest(id) 
+                        ON DELETE CASCADE ON UPDATE CASCADE
+                    ) ENGINE=InnoDB";
+
+        $result[] = "CREATE TABLE IF NOT EXISTS " . $prefix . "fb_settings (
+                        `quest_id` int(11) NOT NULL PRIMARY KEY,
+                        `styles` text COLLATE utf8mb4_unicode_ci NOT NULL,
+                        FOREIGN KEY (quest_id) 
+                        REFERENCES " . $prefix . "fb_quest(id) 
+                        ON DELETE CASCADE ON UPDATE CASCADE
                     ) ENGINE=InnoDB";
 
         return $result;
