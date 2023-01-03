@@ -13,43 +13,15 @@ class VSFB_Get_Data
      */
     public function data()
     {
-        $data = array();
+        global $wpdb;
 
-        $data[] = array(
-                    'id'          => 1,
-                    'title'       => 'The Shawshank Redemption',
-                    'created_at'  => '1994',
-                    'status'      => 1
-                    );
+        $stdClass = $wpdb->get_results("SELECT id, title, status, created_at FROM " . $wpdb->prefix . "fb_quest");
+        $dataArray = json_decode(json_encode($stdClass), true);
 
-        $data[] = array(
-                    'id'          => 2,
-                    'title'       => 'The Godfather',
-                    'created_at'  => '1972',
-                    'status'      => 1
-                    );
-
-        $data[] = array(
-                    'id'          => 8,
-                    'title'       => 'Schindler\'s List',
-                    'created_at'  => '1993',
-                    'status'      => 0
-                    );
-
-        $data[] = array(
-                    'id'          => 9,
-                    'title'       => 'The Lord of the Rings: The Return of the King',
-                    'created_at'  => '2003',
-                    'status'      => 0
-                    );
-
-        $data[] = array(
-                    'id'          => 10,
-                    'title'       => 'Fight Club',
-                    'created_at'  => '1999',
-                    'status'      => 1
-                    );
-
-        return $data;
+        foreach ($dataArray as $key => $value) {
+            $dataArray[$key]['created_at'] = date("Y.m.d H:m", $value['created_at']);
+        }
+        // print_r( $dataArray );
+        return $dataArray;
     }
 }

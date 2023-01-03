@@ -29,7 +29,7 @@ class VSFB_List_Table extends WP_List_Table
         $data = $GetData->data();
         usort( $data, array( &$this, 'sort_data' ) );
 
-        $perPage = 2;
+        $perPage = 100;
         $currentPage = $this->get_pagenum();
         $totalItems = count( $data );
 
@@ -54,7 +54,7 @@ class VSFB_List_Table extends WP_List_Table
         $columns = array(
             'title'       => 'Title',
             'status'      => 'Status',
-            'created_at'    => 'Created',
+            'created_at'  => 'Created',
         );
 
         return $columns;
@@ -95,9 +95,8 @@ class VSFB_List_Table extends WP_List_Table
             case 'status':
             case 'created_at':
                 return $item[ $column_name ];
-
             default:
-                return print_r( $item, true ) ;
+                return print_r( $item, true );
         }
     }
 
@@ -135,8 +134,8 @@ class VSFB_List_Table extends WP_List_Table
         return -$result;
     }
 
-    public function column_title(  $item ) {
-        $edit_link = admin_url( 'post.php?action=edit&amp;post=' .  $item["id"]  );
+    public function column_title( $item ) {
+        $edit_link = admin_url( 'admin.php?page=form-builder-create&edit=' .  $item["id"]  );
         $view_link = get_permalink( $item["id"] ); 
         $output    = '';
  
@@ -154,9 +153,9 @@ class VSFB_List_Table extends WP_List_Table
         foreach ( $actions as $action => $link ) {
             $row_actions[] = '<span class="' . esc_attr( $action ) . '">' . $link . '</span>';
         }
- 
+
         $output .=  '<div class="row-actions">' . implode( ' | ', $row_actions ) . '</div>';
- 
+
         return $output;
     }
 
@@ -165,11 +164,12 @@ class VSFB_List_Table extends WP_List_Table
 
 		$this->screen->render_screen_reader_content( 'heading_list' );
 		?>
+
         <table class="wp-list-table <?php echo implode( ' ', $this->get_table_classes() ); ?>">
             <thead>
-            <tr>
-                <?php $this->print_column_headers(); ?>
-            </tr>
+                <tr>
+                    <?php $this->print_column_headers(); ?>
+                </tr>
             </thead>
 
             <tbody id="the-list" <?= $singular ? " data-wp-lists='list:$singular'" : '' ?> >
@@ -177,12 +177,12 @@ class VSFB_List_Table extends WP_List_Table
             </tbody>
 
             <tfoot>
-            <tr>
-                <?php $this->print_column_headers( false ); ?>
-            </tr>
+                <tr>
+                    <?php $this->print_column_headers( false ); ?>
+                </tr>
             </tfoot>
-
         </table>
+
 		<?php
 		$this->display_tablenav( 'bottom' );
 	}

@@ -39,7 +39,7 @@ class VS_FormBuilder
 				'List form',
 				'All forms',
 				'manage_options',
-				$this->list_slug,
+				$this->plugin_slug,
 				array($this, 'list_page'),
 			);
 

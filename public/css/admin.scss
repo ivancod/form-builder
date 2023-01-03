@@ -177,6 +177,19 @@ $padding-block-content-h: 25px;
     form {
         width: 100%;
         max-width: 600px;
+        position: relative;
+
+        .saveQuest {
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: all 0.3s;
+            font-weight: 700;
+            &:hover {
+                background-color: $color-blue;
+                color: white;
+            }
+        }
     }
     .wrap-blocks {
         background-color: #fff;
@@ -317,13 +330,16 @@ $padding-block-content-h: 25px;
         }
     }
 
-    .add-quest {
+    .add-block {
         background-color: $color-blue;
         color: white;
+        font-weight: 700;
 
         &:hover {
             background-color: #066998;
         }
     }
+
+
   
 }

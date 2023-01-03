@@ -197,6 +197,18 @@
 #vsfb-builder form {
   width: 100%;
   max-width: 600px;
+  position: relative;
+}
+#vsfb-builder form .saveQuest {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: all 0.3s;
+  font-weight: 700;
+}
+#vsfb-builder form .saveQuest:hover {
+  background-color: #0783BE;
+  color: white;
 }
 #vsfb-builder .wrap-blocks {
   background-color: #fff;
@@ -314,10 +326,11 @@
   opacity: 0.8;
   margin: 15px -25px;
 }
-#vsfb-builder .add-quest {
+#vsfb-builder .add-block {
   background-color: #0783BE;
   color: white;
+  font-weight: 700;
 }
-#vsfb-builder .add-quest:hover {
+#vsfb-builder .add-block:hover {
   background-color: #066998;
 }/*# sourceMappingURL=admin.css.map */
