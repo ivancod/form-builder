@@ -36,7 +36,7 @@ class VSFB_List_Table extends WP_List_Table
         $this->set_pagination_args( array(
             'total_items' => $totalItems,
             'per_page'    => $perPage
-        ) );
+        ));
 
         $data = array_slice($data, ( ($currentPage - 1) * $perPage ), $perPage);
 
@@ -135,17 +135,17 @@ class VSFB_List_Table extends WP_List_Table
     }
 
     public function column_title( $item ) {
-        $edit_link = admin_url( 'admin.php?page=form-builder-create&edit=' .  $item["id"]  );
+        $edit_link = admin_url( 'admin.php?page=form-builder-create&edit=' . $item["id"] );
         $view_link = get_permalink( $item["id"] ); 
         $output    = '';
  
         // Title.
-        $output .= '<strong><a href="' . esc_url( $edit_link ) . '" class="row-title">' . esc_html(  $item["title"]   ) . '</a></strong>';
+        $output .= '<strong><a href="' . esc_url( $edit_link ) . '" class="row-title">' . esc_html( $item["title"] ) . '</a></strong>';
  
         // Get actions.
         $actions = array(
-            'edit'   => '<a target="_blank" href="' . esc_url( $edit_link ) . '">' . esc_html__( 'Edit', 'my_plugin' ) . '</a>',
-            'view'   => '<a target="_blank" href="' . esc_url( $view_link ) . '">' . esc_html__( 'View', 'my_plugin' ) . '</a>',
+            'edit'   => '<a href="' . esc_url( $edit_link ) . '">' . esc_html__( 'Edit', 'my_plugin' ) . '</a>',
+            'delete' => '<a style="cursor:pointer" onClick="deleteQuest('. $item["id"] .')">' . esc_html__( 'Delete', 'my_plugin' ) . '</a>',
         );
  
         $row_actions = array();
@@ -154,9 +154,26 @@ class VSFB_List_Table extends WP_List_Table
             $row_actions[] = '<span class="' . esc_attr( $action ) . '">' . $link . '</span>';
         }
 
-        $output .=  '<div class="row-actions">' . implode( ' | ', $row_actions ) . '</div>';
+        $output .= '<div class="row-actions">' . implode( ' | ', $row_actions ) . '</div>';
 
         return $output;
+    }
+
+    public function column_status( $item ) {
+        $checked = $item["status"] ? 'true' : 'false';
+
+        return ' <div class="checkbox-switch">
+                    <input type="checkbox"  
+                        onchange="changeStatus(this,'. $item["id"] .')"
+                        checked="'. $checked .'"
+                        value="'. $item["status"] .'"
+                        class="input-checkbox"
+                    >
+                    <div class="checkbox-animate">
+                        <span class="checkbox-off">OFF</span>
+                        <span class="checkbox-on">ON</span>
+                    </div>
+                </div>';
     }
 
 	public function display() {

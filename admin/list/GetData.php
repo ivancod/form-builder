@@ -19,7 +19,7 @@ class VSFB_Get_Data
         $dataArray = json_decode(json_encode($stdClass), true);
 
         foreach ($dataArray as $key => $value) {
-            $dataArray[$key]['created_at'] = date("Y.m.d H:m", $value['created_at']);
+            $dataArray[$key]['created_at'] = date("d.m.Y H:i", $value['created_at']);
         }
         // print_r( $dataArray );
         return $dataArray;

@@ -1,36 +1,18 @@
 const { createApp } = Vue;
 
 const TMP_Blocks = {
-  title: {
-    type: 'title',
-    title: "",
-  },
-  desc: {
-    type: 'desc',
-    title: "",
-  },
-  text: {
-    type: 'text',
-    title: "",
-    text_type: "email",
-  },
-  rating: {
-    type: 'rating',
-    title: "",
-    list: [ "" ],
-  },
-  check:{
-    type: 'check',
-    title: "",
-    list: [ "" ],
-  },
+  title: { title: "", type: 'title' },
+  desc:  { title: "", type: 'desc' },
+  text:  { title: "", type: 'text', text_type: "email" },
+  rating:{ title: "", type: 'rating', list: [""] },
+  check: { title: "", type: 'check', list: [""] },
 };
 
 createApp({
 
   data: () => ({
-      title: "заголовок",
-      desc: "desc",
+      title: "",
+      desc: "",
       select_type_block: "title",
       blocks: [ { label: "(no label)", show: false, type: 'title', required: 0, title: "" } ]
   }),
@@ -101,16 +83,23 @@ createApp({
     },
   },
   beforeMount () {
+    let params = (new URL(document.location)).searchParams; 
+    let quest_id = params.get("edit");
+
+    if( !quest_id ) {
+      return
+    }
+
     jQuery.ajax({
       method: "GET",
       url: ajaxurl,
       data: {
         action:"get_form",
-        id: 2,
+        id: quest_id,
       },
       success: res => { 
         if( res.status !== "success" ) {
-          return alert("Error");
+          return alert(res.data);
         }
         console.log(res);
         this.title  = res.data.quest.title;
@@ -131,3 +120,42 @@ createApp({
     })
   }
 }).mount('#vsfb-builder');
+
+const changeStatus = (input, quest_id) => {
+  let newValue = input.value == 0 ? 1 : 0;
+
+  jQuery.ajax({
+    method: "POST",
+    url: ajaxurl,
+    data: {
+      action:"change_quest_status",
+      id: quest_id,
+      status: newValue
+    },
+    success: res => { 
+      if( res.status !== "success" ) {
+        return alert(res.data);
+      }
+      input.value = newValue
+      input.check = !!newValue
+    }
+  })
+}
+
+const deleteQuest = quest_id => {
+  jQuery.ajax({
+    method: "POST",
+    url: ajaxurl,
+    data: {
+      action:"delete_form",
+      id: quest_id,
+    },
+    success: res => { 
+      if( res.status !== "success" ) {
+        return alert(res.data);
+      }
+      location.reload();
+    }
+  })
+}
+// 

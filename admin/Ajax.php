@@ -48,6 +48,9 @@ class VS_Ajax
         // DELETE
         add_action( 'wp_ajax_nopriv_delete_form', array($this, 'delete_form') );
         add_action( 'wp_ajax_delete_form', array($this, 'delete_form') );
+        // CHANGE STATUS QUEST
+        add_action( 'wp_ajax_nopriv_change_quest_status', array($this, 'change_quest_status') );
+        add_action( 'wp_ajax_change_quest_status', array($this, 'change_quest_status') );
     }
 
     public function create_form()
@@ -211,17 +214,47 @@ class VS_Ajax
 
         $res = $this->get_quest( $_GET['id'] );
 
+        if( !$res['quest'] ) {
+            wp_send_json([ 'status' => 'error', 'data' => 'Quest not found!' ]);
+        }
+
         wp_send_json([ 'status' => 'success', 'data' => $res ]);
         wp_die(); 
     }
 
     public function delete_form()
 	{
-        // $_POST['data']
-        wp_send_json([ 'post' => $_POST, 'get' => $_GET ]);
+        global $wpdb;
+
+        try {
+            $wpdb->delete( $this->quest, array( 'id' => $_POST['id'] ) );
+
+            wp_send_json([ 'status' => 'success' ]);
+        } catch (Exception $err) {
+            wp_send_json([ 'status' => 'error', 'data' => $err ]);
+        }
+        
         wp_die();
     }
 
+    public function change_quest_status()
+    {
+        if( !isset($_POST['id']) OR !isset($_POST['status']) ) {
+            wp_send_json([ 'status' => 'error', 'data' => 'Validation Error' ]);
+            wp_die();
+        }
+
+        global $wpdb;
+
+        try {
+            $wpdb->query( "UPDATE " . $this->quest . " SET status = " . $_POST['status'] . " WHERE id = " . $_POST['id'] );
+
+            wp_send_json([ 'status' => 'success' ]);
+        } catch (Exception $err) {
+            wp_send_json([ 'status' => 'error', 'data' => $err ]);
+        }
+        wp_die();
+    }
     // ---------------------------------------------------------------
 
     public function setting_actions()
@@ -254,6 +287,9 @@ class VS_Ajax
 
         return $result;
     }
+
+
+
 }
 
 new VS_Ajax();
