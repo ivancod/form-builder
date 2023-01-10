@@ -21,5 +21,6 @@
             </tr>
         </tbody>
     </table>
+    <button name='save' class='button button-primary'>Save</button>
     <hr>
 </form>

@@ -11,10 +11,11 @@ const TMP_Blocks = {
 createApp({
 
   data: () => ({
-      title: "",
-      desc: "",
-      select_type_block: "title",
-      blocks: [ { label: "(no label)", show: false, type: 'title', required: 0, title: "" } ]
+    id: 0,
+    title: "",
+    desc: "",
+    select_type_block: "title",
+    blocks: [ { label: "(no label)", show: false, type: 'title', required: 0, title: "" } ]
   }),
 
   methods: {
@@ -31,11 +32,7 @@ createApp({
     addBlock() {
       const block = Object.assign(
         TMP_Blocks[ this.select_type_block ], 
-        {
-          label: "(no label)",
-          show: false,
-          required: 0,
-        }
+        { label: "(no label)", show: false, required: 0 }
       );
 
       this.blocks.push( block );
@@ -67,14 +64,17 @@ createApp({
 
     // Button
     saveQuest() {
+      const action = this.id ? "update_form" : "create_form"
+
       jQuery.ajax({
         method: "POST",
         url: ajaxurl,
         data: {
-          action:"create_form",
+          action,
           quest: { 
-            title: Object.assign(this.title, {}),
-            desc: Object.assign(this.desc, {}),
+            id: this.id,
+            title: this.title,
+            desc: this.desc,
           },
           blocks: Object.assign(this.blocks, {}),
         },
@@ -89,6 +89,8 @@ createApp({
     if( !quest_id ) {
       return
     }
+
+    this.id = quest_id
 
     jQuery.ajax({
       method: "GET",
@@ -150,7 +152,7 @@ const deleteQuest = quest_id => {
       action:"delete_form",
       id: quest_id,
     },
-    success: res => { 
+    success: res => {
       if( res.status !== "success" ) {
         return alert(res.data);
       }

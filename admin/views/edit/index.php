@@ -18,7 +18,6 @@
         <br><br>
         <hr>
         <br>
-        <!-- <pre style="position: absolute;left: 0;">{{ blocks }}</pre> -->
         
         <div class="wrap-blocks" >
             <div class="head">
@@ -76,5 +75,4 @@
             <div @click="addBlock" class="button button-primary add-block" style="margin-bottom: 0px;">Add block</div>
         </div>
     </form>
-
 </div>

@@ -68,7 +68,7 @@ class VS_Ajax
                 'title' => $title,
                 'desc' => $desc,
                 'user_id' => $user_id,
-                'cteated_at' => time(),
+                'created_at' => time(),
             ]);
         } catch (Exception $err) {
             wp_send_json([ 'status' => 'error', 'data' => $err ]);
@@ -133,77 +133,21 @@ class VS_Ajax
     public function update_form()
 	{
         global $wpdb;
-        global $wpdbx;
 
+        $quest_id = $_POST['quest']['id'];
         $title  = $_POST['quest']['title'];
         $desc   = $_POST['quest']['desc'];
-        $blocks = $_POST['blocks'];
-        $user_id = get_current_user_id();
 
         try {
-            $wpdb->insert( $this->quest, [
-                'title' => $title,
-                'desc' => $desc,
-                'user_id' => $user_id,
-                'cteated_at' => time(),
-            ]);
+            $wpdb->update( 
+                $this->quest,
+                [ 'title' => $title, 'desc' => $desc ],
+                [ 'id' => $quest_id ]
+            );
         } catch (Exception $err) {
             wp_send_json([ 'status' => 'error', 'data' => $err ]);
         }
         
-        $quest_id = $wpdb->insert_id;
-
-        $quest_blocks = [];
-        foreach($blocks as $block){
-            $tmp_block = [
-                'label'     => $block['label'],
-                'title'     => $block['title'],
-                'quest_id'  => $quest_id,
-            ];
-
-            switch($block['type']) {
-                case 'text':
-                    $tmp_block['required'] = $block['required'] ?? '';
-                    $tmp_block['type'] = $block['text_type'];
-                break;
-                case 'rating':
-                    $tmp_block['required'] = $block['required'] ?? '';
-                    $tmp_block['ask_0'] = $block['list'][0] ?? '';   
-                    $tmp_block['ask_1'] = $block['list'][1] ?? '';
-                    $tmp_block['ask_2'] = $block['list'][2] ?? '';
-                    $tmp_block['ask_3'] = $block['list'][3] ?? '';
-                    $tmp_block['ask_4'] = $block['list'][4] ?? '';
-                break;
-                case 'check':
-                    $tmp_block['required'] = $block['required'] ?? '';
-                    $tmp_block['ask_0'] = $block['list'][0] ?? '';   
-                    $tmp_block['ask_1'] = $block['list'][1] ?? '';
-                    $tmp_block['ask_2'] = $block['list'][2] ?? '';
-                    $tmp_block['ask_3'] = $block['list'][3] ?? '';
-                    $tmp_block['ask_4'] = $block['list'][4] ?? '';
-                break;
-            }
-
-            try {
-               $wpdb->insert($this->{'block_' . $block['type']}, $tmp_block);
-            } catch (Exception $err) {
-                wp_send_json([ 'status' => 'error', 'data' => $err ]);
-            }
-
-            $quest_blocks[] = [
-                'block_id' => $wpdb->insert_id,
-                'quest_id' => $quest_id,
-                'type' => $block['type'],
-            ];
-       
-        }
-
-        try {
-           $wpdbx->insert_multiple( $this->quest_blocks, $quest_blocks );
-        } catch (Exception $err) {
-            wp_send_json([ 'status' => 'error', 'data' => $err ]);
-        }
-
         wp_send_json([ 'status' => 'success' ]);
         wp_die(); 
     }
@@ -247,7 +191,11 @@ class VS_Ajax
         global $wpdb;
 
         try {
-            $wpdb->query( "UPDATE " . $this->quest . " SET status = " . $_POST['status'] . " WHERE id = " . $_POST['id'] );
+            $wpdb->update( 
+                $this->quest,
+                array( 'status' => $_POST['status'] ),
+                array( 'id' => $_POST['id'] )
+            );
 
             wp_send_json([ 'status' => 'success' ]);
         } catch (Exception $err) {

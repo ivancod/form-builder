@@ -1,7 +1,6 @@
 <?php
 require_once ( ABSPATH . 'wp-content/plugins/form-builder/inc/Tabs.php' );
 require_once __DIR__ . '/General.php';
-require_once __DIR__ . '/Email.php';
 require_once __DIR__ . '/Styles.php';
 
 /**
@@ -28,10 +27,6 @@ class VSFB_Settings
             [
                 'title' => 'Styles',
                 'content' => new VSFB_Settings_Styles(),
-            ],
-            [
-                'title' => 'E-mail',
-                'content' => new VSFB_Settings_Email(),
             ],
         ]);
 

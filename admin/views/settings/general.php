@@ -1,34 +1,15 @@
-<form>
-    <table class='form-table' role='presentation'>
-        <tbody>
-            <tr class='form-field form-required'>
-                <th scope='row'><label for='title'>Title<span class='description'> *</span></label></th>
-                <td><input name='title' type='text' aria-required='true' maxlength='60'></td>
-            </tr>
-            <tr class='form-field'>
-                <th scope='row'><label for='desc'>Description<span class='description'></span></label></th>
-                <td><textarea name='desc'></textarea></td>
-            </tr>
-            <tr class='form-field'>
-                <th scope='row'><label for='default_category'>Type<span class='description'></span></label></th>
-                <td>
-                    <select name='default_category' id='default_category' class='postform'>
-                        <option class='level-0' value='1' selected='selected'>Без рубрики</option>
-                        <option class='level-1' value='2'>Без рубрики 2</option>
-                    </select>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <hr>
-</form>
-<form>
+<form action="" method="post">
     <table class='form-table' role='presentation'>
         <tbody>
             <tr class='form-field'>
-                <th scope='row'><button name='update_db' class='button button-primary' onclick='confirm('Are you sure?')'>Update DB</button></th>
-                <td> Після цього база данних обновиться!</td>
+                <th scope='row'><label for='email'>E-mail</label></th>
+                <td><input name='form[email]' type='email' value="<?= $data['email']?>"></td>
+            </tr>
+            <tr class='form-field'>
+                <th scope='row'><label for='notification_email'>Send notifications on E-mail</label></th>
+                <td><input name='form[email_notify]' type='checkbox' checked="<?= $data['email_notify']?>" value="1"></td>
             </tr>
         </tbody>
     </table>
+    <button name='save_settings' value="1" class='button button-primary'>Save</button>
 </form>

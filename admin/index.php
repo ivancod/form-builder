@@ -24,15 +24,15 @@ class VS_FormBuilder
     public function add_menu_item() 
 	{
         add_action('admin_menu', function () {
-            add_menu_page(
-                'Form Builder',
-                'Form Builder',
-                'manage_options',
-                $this->plugin_slug,
-                array($this, 'list_page'),
-                'dashicons-chart-area',
-                56
-            );
+			add_menu_page(
+				'Form Builder',
+				'Form Builder',
+				'manage_options',
+				$this->plugin_slug,
+				array($this, 'list_page'),
+				'dashicons-chart-area',
+				56
+			);
 
 			add_submenu_page( 
 				$this->plugin_slug,
@@ -87,7 +87,7 @@ class VS_FormBuilder
 		*/ 
 		 
 		add_action( 'admin_enqueue_scripts', function () {
-			$path = '/' . PLUGINDIR .'/form-builder/public';
+			$path = '/'. PLUGINDIR .'/form-builder/public';
 			
 			// CSS
 			wp_enqueue_style( 'vsfb-admin-style', "{$path}/css/admin.css", array(), time() );
@@ -96,7 +96,6 @@ class VS_FormBuilder
 			wp_localize_script( 'FrontEndAjax', 'ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 			wp_enqueue_script( 'vsfb-vue-script', "{$path}/js/lib/vue.js", array(), time(), true );
 			wp_enqueue_script( 'vsfb-admin-script', "{$path}/js/admin.js", array(), '1.0.0', true );
-
 		});
 	}
 
