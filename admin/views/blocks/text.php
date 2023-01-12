@@ -1,4 +1,4 @@
-<div class="block-text">
+<div class="block-text flex fd-c">
     <label>
         <p>Field Label</p>
         <input type="text" v-model="block.label">

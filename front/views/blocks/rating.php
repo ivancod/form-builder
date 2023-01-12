@@ -1,4 +1,4 @@
-<div class="block-rating flex fd-c">
+<div class="block-rating">
     <label>
         <p>Field Label</p>
         <input type="text" v-model="block.label">

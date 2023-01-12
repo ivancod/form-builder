@@ -1,10 +1,10 @@
-<div class="block-title flex fd-c">
+<div class="block-text">
     <label>
         <p>Field Label</p>
         <input type="text" v-model="block.label">
     </label>
     <label>
-        <p>Field Value  <sup>*</sup></p>
-        <input type="text" v-model="block.title">
+        <p>Description <sup>*</sup></p>
+        <textarea v-model="block.title" ></textarea>
     </label>
 </div>

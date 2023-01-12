@@ -15,6 +15,7 @@ createApp({
     title: "",
     desc: "",
     select_type_block: "title",
+    isSaving: 0,
     blocks: [ { label: "(no label)", show: false, type: 'title', required: 0, title: "" } ]
   }),
 
@@ -65,6 +66,7 @@ createApp({
     // Button
     saveQuest() {
       const action = this.id ? "update_form" : "create_form"
+      this.isSaving = 1
 
       jQuery.ajax({
         method: "POST",
@@ -78,7 +80,12 @@ createApp({
           },
           blocks: Object.assign(this.blocks, {}),
         },
-        success: res => { console.log(res) }
+        success: res => { 
+          if( res.status !== "success" ) {
+            return alert(res.data);
+          }
+          this.isSaving = 0
+        }
       })
     },
   },

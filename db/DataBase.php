@@ -81,7 +81,7 @@ class VSFB_DataBase
                         `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `desc` text COLLATE utf8mb4_unicode_ci NOT NULL,
                         `status` int(11) NOT NULL,
-                        `cteated_at` int(12) NOT NULL
+                        `created_at` int(12) NOT NULL
                     ) ENGINE=InnoDB";
 
         $result[] = "CREATE TABLE IF NOT EXISTS $QUEST_ANSWERS (

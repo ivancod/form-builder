@@ -23,6 +23,6 @@ add_action('init', function () {
 		require_once __DIR__ . '/admin/index.php';
 	} else {
 		// we are in front mode
-		// require_once __DIR__ . '/front/index.php';
+		require_once __DIR__ . '/front/index.php';
 	}
 });
